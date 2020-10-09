@@ -17,6 +17,8 @@ public class Bot {
           System.out.println(String.format("Logged in as %s#%s", self.getUsername(), self.getDiscriminator()));
         });
         
+        // ---------------------- START OF EDITABLE SECTION ---------------------- //
+        
         client.getEventDispatcher().on(MessageCreateEvent.class)
         .map(MessageCreateEvent::getMessage)
         .filter(message -> message.getAuthor().map(user -> !user.isBot()).orElse(false))
@@ -24,6 +26,8 @@ public class Bot {
         .flatMap(Message::getChannel)
         .flatMap(channel -> channel.createMessage("Pong!"))
         .subscribe();
+        
+        // ---------------------- END OF EDITABLE SECTION ---------------------- //
         
         client.onDisconnect().block();
     }
