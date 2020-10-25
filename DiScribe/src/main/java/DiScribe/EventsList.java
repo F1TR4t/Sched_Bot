@@ -9,5 +9,6 @@ public class EventsList {
 	public EventsList() {
 		list = new ArrayList<Event>();
 	}
-
+	
+	
 }
