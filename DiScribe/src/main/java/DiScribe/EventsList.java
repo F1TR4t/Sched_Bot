@@ -12,7 +12,7 @@ public class EventsList {
 	}
 	
 
-	public boolean add(Event E)
+	public boolean add(Event E) {
 		if(E == null)
 		{
 			return false;
