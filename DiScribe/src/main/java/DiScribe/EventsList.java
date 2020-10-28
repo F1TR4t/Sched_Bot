@@ -11,30 +11,31 @@ public class EventsList {
 		
 	}
 	
-	public boolean addEvent(Event newEvent)
+	public boolean add(Event E)
 	{
-		if(newEvent == null)
+		if(E == null)
 		{
 			return false;
 		}
 		
-		list.add(newEvent);
-		return true;
+		return list.add(E);
 	}
 	
-	public boolean removeEvent(Event eventID)
+	public boolean remove(Event E)
 	{
-		if(eventID == null)
+		if(E == null)
 		{
 			return false;
 		}
 		
-		list.remove(eventID);
+		// Check to see if the Event is stored in the list
+		
+		return list.remove(E);
 	}
 	
-	public Event getEvent(Event eventID)
+	public Event get(Event E)
 	{
-		return list.get(list.indexOf(eventID));
+		return list.get(list.indexOf(E));
 	}
 	
 	public static void main(String []args)
@@ -42,8 +43,11 @@ public class EventsList {
 		Event bob = new Event("bob");
 		EventsList list = new EventsList();
 		
-		list.addEvent(bob);
-		System.out.print(list.getEvent(bob));
+		list.add(bob);
+		System.out.println(list.get(bob)); // Works
+		
+		System.out.println(list.remove(bob));
+		System.out.println(list.remove(bob)); // Works
 	}
 	
 }
