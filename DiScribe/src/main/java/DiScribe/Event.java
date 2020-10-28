@@ -10,4 +10,5 @@ public class Event {
 	public Event(String name) {
 		this.name = name;
 	}
+	
 }
