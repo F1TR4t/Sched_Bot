@@ -11,7 +11,7 @@ public class EventsList {
 		
 	}
 	
-	public boolean addEvent(Event newEvent)
+	public boolean add(Event newEvent)
 	{
 		if(newEvent == null)
 		{
@@ -22,19 +22,20 @@ public class EventsList {
 		return true;
 	}
 	
-	public boolean removeEvent(Event eventID)
+	public boolean remove(Event eventName)
 	{
-		if(eventID == null)
+		if(eventName == null)
 		{
 			return false;
 		}
 		
-		list.remove(eventID);
+		list.remove(eventName);
+		return true;
 	}
 	
-	public Event getEvent(Event eventID)
+	public Event get(Event eventName)
 	{
-		return list.get(list.indexOf(eventID));
+		return list.get(list.indexOf(eventName));
 	}
 	
 	public static void main(String []args)
@@ -42,8 +43,8 @@ public class EventsList {
 		Event bob = new Event("bob");
 		EventsList list = new EventsList();
 		
-		list.addEvent(bob);
-		System.out.print(list.getEvent(bob));
+		list.add(bob);
+		System.out.print(list.get(bob));
 	}
 	
 }
