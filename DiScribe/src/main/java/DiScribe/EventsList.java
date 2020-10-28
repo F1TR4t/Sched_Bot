@@ -11,8 +11,8 @@ public class EventsList {
 		
 	}
 	
+
 	public boolean add(Event E)
-	{
 		if(E == null)
 		{
 			return false;
@@ -28,6 +28,7 @@ public class EventsList {
 			return false;
 		}
 		
+
 		// Check to see if the Event is stored in the list
 		
 		return list.remove(E);
@@ -36,6 +37,7 @@ public class EventsList {
 	public Event get(Event E)
 	{
 		return list.get(list.indexOf(E));
+
 	}
 	
 	public static void main(String []args)
@@ -44,10 +46,12 @@ public class EventsList {
 		EventsList list = new EventsList();
 		
 		list.add(bob);
+
 		System.out.println(list.get(bob)); // Works
 		
 		System.out.println(list.remove(bob));
 		System.out.println(list.remove(bob)); // Works
+
 	}
 	
 }
