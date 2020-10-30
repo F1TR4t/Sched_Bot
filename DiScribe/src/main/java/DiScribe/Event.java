@@ -88,7 +88,7 @@ public class Event {
 	}
 	
 	public void setDescription(String Description) {
-		if(Description.split("\\s+").length > 10) {
+		if(Description.split("\\s+").length > 100) {
 			System.out.println("The Description should less than 100 words.");
 		}
 		else {
