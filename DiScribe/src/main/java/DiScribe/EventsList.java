@@ -42,10 +42,7 @@ public class EventsList {
 	}
 	
 	public boolean contains(Event E) {
-		if(list.contains(E)) {
-			return true;
-		}
-		return false;
+		return list.contains(E);
 	}
 	
 	public Event get(int index) {
@@ -90,9 +87,9 @@ public class EventsList {
 		return list;
 	}
 	
-	public void displayList() {
+	public String displayList() {
 		// Displays list in string format
-		
+		return "";
 	}
 	
 	public static void main(String []args) {

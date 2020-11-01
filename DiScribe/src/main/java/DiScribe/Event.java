@@ -2,21 +2,21 @@ package DiScribe;
 
 import java.util.*;
 
-public class Event {
+public class Event implements Comparable {
 	
 	private String name;
-	private String Description;
-	private Boolean Active;
-	private String Date;
-	private String StartTime;
-	private String Server;
-	private String Channal;
-	private Boolean Recur;
+	private String desc;
+	private boolean active;
+	private String date;
+	private int start_time;
+	private String server;
+	private String channel;
+	private boolean recur;
 	private String Frequency;
-	private int MaxFreq;
-	private int NumAnnounce;
-	private int[] AnnounceTime;
-	private ArrayList<String> Participants;
+	private int max_freq;
+	private int num_ann;
+	private int[] ann_time;
+	private ArrayList<String> party;
 	
 	//Constructor
 	public Event(String name) {
@@ -28,52 +28,52 @@ public class Event {
 		return name;
 	}
 	
-	public String getDescription() {
-		return Description;
+	public String getdesc() {
+		return desc;
 	}
 	
-	public Boolean getActive() {
-		return Active;
+	public boolean getactive() {
+		return active;
 	}
 	
-	public String getDate() {
-		return Date;
+	public String getdate() {
+		return date;
 	}
 	
-	public String getStartTime() {
-		return StartTime;
+	public int getstart_time() {
+		return start_time;
 	}
 	
-	public String getServer() {
-		return Server;
+	public String getserver() {
+		return server;
 	}
 	
-	public String getChannal() {
-		return Channal;
+	public String getchannel() {
+		return channel;
 	}
 	
-	public Boolean getRecur() {
-		return Recur;
+	public boolean getrecur() {
+		return recur;
 	}
 	
 	public String getFrequency() {
 		return Frequency;
 	}
 	
-	public int getMaxFreq() {
-		return MaxFreq;
+	public int getmax_freq() {
+		return max_freq;
 	}
 	
-	public int getNumAnnounce() {
-		return NumAnnounce;
+	public int getnum_ann() {
+		return num_ann;
 	}
 	
-	public int[] getAnnounceTime() {
-		return AnnounceTime;
+	public int[] getann_time() {
+		return ann_time;
 	}
 	
-	public ArrayList<String> getParticipants(){
-		return Participants;
+	public ArrayList<String> getparty(){
+		return party;
 	}
 	
 	
@@ -81,27 +81,36 @@ public class Event {
 	public void setName(String name) {
 		if(name.length() > 50) {
 			System.out.println("The name of event you set should less than 50 characters.");
+			return;
 		}
-		else {
-			this.name = name;
-		}
+		this.name = name;
 	}
 	
-	public void setDescription(String Description) {
-		if(Description.split("\\s+").length > 10) {
-			System.out.println("The Description should less than 100 words.");
+	public void setdesc(String desc) {
+		if(desc.split("\\s+").length > 10) {
+			System.out.println("The desc should less than 100 words.");
 		}
-		else {
-			this.Description = Description;
-		}
+		this.desc = desc;
 	}
 	
-	public void setActive(Boolean Active) {
-		this.Active = Active;
+	public void setactive(Boolean active) {
+		this.active = active;
 	}
 	
-	@Override public String toString() {
+	@Override 
+	public String toString() {
 		return name;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Event e = (Event)o;
+		
+		if ( this.name.equals(e.name) ) {
+			return 0;
+		}
+		
+		return -1;
 	}
 	
 	public static void main(String[] args) {
@@ -109,7 +118,9 @@ public class Event {
 		Event a = new Event("dd");
 		a.setName("sbdfdfgdfgdfgdgdfdgggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
 		System.out.println("Name: " + a.name);
-		a.setDescription("a a a a a a a a a a a a a");
-		System.out.println("Description: " + a.Description);
+		a.setdesc("a a a a a a a a a a a a a");
+		System.out.println("desc: " + a.desc);
 	}
+
+	
 }

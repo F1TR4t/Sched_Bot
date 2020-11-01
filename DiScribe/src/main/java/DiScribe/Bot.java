@@ -23,37 +23,51 @@ public class Bot {
 		// Make sure the command has Keyword
 		if ( command[0] == null ) { return; } 
 		
-		if ( command[0].equals("ping")) {
-			event.getMessage()
-	        .getChannel().block()
-	        .createMessage("Pong!").block();
-		}
-		
 		if ( command[0].equals("create")) {
-			event.getMessage()
-			.getChannel().block()
-			.createMessage("Creating " + command[1]).block();
+			if ( (command.length>1) && events.add(new Event(command[1])) ) {
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Created the event \"" + command[1] + "\"").block();
+			} else {
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("The create function requires you to name the event\n"
+						+ "Note: the name should be less than 50 characters.\n\n"
+						+ "```create [event_name]```\n\n"
+						+ "Example: Creating an event BBQ\n"
+						+ "```create BBQ```").block();
+			}
 		}
 		
 		if ( command[0].equals("remove")) {
-			event.getMessage()
-			.getChannel().block()
-			.createMessage("Removing " + command[1]).block();
+			if ( (command.length>1) && events.remove(new Event(command[1])) ) {
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Removed the event \"" + command[1] + "\"").block();
+			} else {
+					event.getMessage()
+					.getChannel().block()
+					.createMessage("The remove function requires you to name the event you want to remove\n\n"
+							+ "```remove [event_name]```\n\n"
+							+ "Example: If I created an event BBQ\n"
+							+ "```remove BBQ```").block();
+				}
 		}
 		
 		if ( command[0].equals("list")) {
 			event.getMessage()
 			.getChannel().block()
-			.createMessage("Listing Events").block();
+			.createMessage(events.displayList()).block();
 		}
 		
 		if ( command[0].equals("display")) {
 			event.getMessage()
 			.getChannel().block()
-			.createMessage("Displaying " + command[1]).block();
+			.createMessage("Displaying the event \"" + command[1] +"\"\n\n"
+					+ events.get(events.find(new Event(command[1]))).toString() ).block();
 		}
 		
-		if ( command[0].equals("edit")) {
+		if ( command[0].equals("edit")) { // To be worked on
 			event.getMessage()
 			.getChannel().block()
 			.createMessage("Editing " + command[1]).block();
