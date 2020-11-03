@@ -9,7 +9,6 @@ public class EventsList {
 	
 	public EventsList() {
 		list = new ArrayList<Event>();
-		nameList = new ArrayList<String>();
 	}
 	
 
@@ -17,7 +16,6 @@ public class EventsList {
 		if(E == null) {
 			return false;
 		}
-		nameList.add(E.toString());
 		return list.add(E);
 	}
 	
@@ -25,7 +23,6 @@ public class EventsList {
 		if(E == null) {
 			return false;
 		}
-		nameList.add(index, E.toString());
 		list.add(index, E);
 		return true;
 	}
@@ -37,12 +34,14 @@ public class EventsList {
 		else if(list.contains(E) == false) {
 			return false;
 		}
-		nameList.remove(E.toString());
 		return list.remove(E);
 	}
 	
 	public boolean contains(Event E) {
-		return list.contains(E);
+		if(list.contains(E)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public Event get(int index) {
@@ -87,22 +86,48 @@ public class EventsList {
 		return list;
 	}
 	
-	public String displayList() {
-		// Displays list in string format
-		return "";
+	public void displayList() {
+		// Temporary display method without date or status
+		
+		System.out.println(" Name                                        Date                                        Active");
+		System.out.println("------------------------------------------------------------------------------------------------");
+		for(int i = 0; i < list.size(); i++) {
+			System.out.printf("%s \n", list.get(i).toString());
+		}
+		System.out.print("\n");
 	}
 	
 	public static void main(String []args) {
-		Event bob = new Event("bob");
 		EventsList list = new EventsList();
 		
+		Event bob = new Event("bob");
+		Event jim = new Event("jim");
+		Event tim = new Event("tim");
+		Event joe = new Event("joe");
+		Event sam = new Event("sam");
+		Event jay = new Event("jay");
+		Event jen = new Event("jen");
+		
+		// Testing regular add()
 		list.add(bob);
-
-		System.out.println(list.get(0)); // Works
+		list.add(jim);
+		list.add(tim);
+		list.add(joe);
+		list.add(sam);
+		list.add(jay);
+		
+		// Testing displayList()
+		list.displayList(); // Works
+		
+		list.add(3, jen);
+		System.out.println("Testing adding at an index");
+		list.displayList();
 		
 		System.out.println(list.remove(bob));
 		System.out.println(list.remove(bob)); // Works
-
+		
+		list.displayList();
+		
 	}
 	
 }
