@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 public class Bot {
 	
 	private static EventsList events;
+	private static int numEvents = 0;
 	
 	public static void process(String[] command, int len, MessageCreateEvent event) {
 		
@@ -24,14 +25,19 @@ public class Bot {
 		if ( command[0] == null ) { return; } 
 		
 		if ( command[0].equals("create")) {
-			if ( (command.length>1) && events.add(new Event(command[1])) ) {
+			if ( (command.length == 2) && events.add(new Event(command[1])) ) { // If user specifies a name
+				numEvents++;
 				event.getMessage()
 				.getChannel().block()
 				.createMessage("Created the event \"" + command[1] + "\"").block();
-			} else {
+			} else if (command.length == 1 && events.add(new Event("Event" + numEvents))) { // When user does not specify a name
 				event.getMessage()
 				.getChannel().block()
-				.createMessage("The create function requires you to name the event\n"
+				.createMessage("Created the event \"Event" + numEvents++ + "\"").block();
+			} else { // When they add too many arguments
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("The create command requires you to name the event\n"
 						+ "Note: the name should be less than 50 characters.\n\n"
 						+ "```create [event_name]```\n\n"
 						+ "Example: Creating an event BBQ\n"
@@ -40,31 +46,40 @@ public class Bot {
 		}
 		
 		if ( command[0].equals("remove")) {
-			if ( (command.length>1) && events.remove(new Event(command[1])) ) {
+			if ( (command.length>1) && events.remove(new Event(command[1])) ) { // Specifies event to be removed
 				event.getMessage()
 				.getChannel().block()
 				.createMessage("Removed the event \"" + command[1] + "\"").block();
-			} else {
+			} else { // No Specification whatsoever
 					event.getMessage()
 					.getChannel().block()
-					.createMessage("The remove function requires you to name the event you want to remove\n\n"
+					.createMessage("The remove command requires you to name the event you want to remove\n\n"
 							+ "```remove [event_name]```\n\n"
 							+ "Example: If I created an event BBQ\n"
 							+ "```remove BBQ```").block();
 				}
 		}
 		
-		if ( command[0].equals("list")) {
+		/*if ( command[0].equals("list")) {
 			event.getMessage()
 			.getChannel().block()
 			.createMessage(events.displayList()).block();
-		}
+		}*/
 		
-		if ( command[0].equals("display")) {
-			event.getMessage()
-			.getChannel().block()
-			.createMessage("Displaying the event \"" + command[1] +"\"\n\n"
+		if ( command[0].equals("display")) { // Prone to Null Pointer Exceptions
+			if ( command.length == 2) {
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Displaying the event \"" + command[1] +"\"\n\n"
 					+ events.get(events.find(new Event(command[1]))).toString() ).block();
+			} else {
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("The display command requires you to name the event you want to remove\n\n"
+						+ "```display [event_name]```\n\n"
+						+ "Example: If I created an event BBQ\n"
+						+ "```display BBQ```").block();
+			}
 		}
 		
 		if ( command[0].equals("edit")) { // To be worked on
