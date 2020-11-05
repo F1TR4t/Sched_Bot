@@ -175,6 +175,32 @@ public class Event implements Comparable {
 		}
 	}
 	
+	
+	public void setmax_freq(int max_freq) {
+		if(getrecur() == false) {
+			System.out.println("The event will not recur.");
+		}
+		else {
+			if(max_freq <= 0) {
+				System.out.println("The times should greater than 0");
+			}
+			else {
+				this.max_freq = max_freq;
+				this.setrecur(false);
+			}
+		}
+	}
+	
+	public void setnum_ann(int num_ann) {
+		if(num_ann <= 0) {
+			System.out.println("Number of times to announce should greater than 0");
+		}
+		else {
+			this.num_ann = num_ann;
+		}
+	}
+	
+	
 	@Override 
 	public String toString() {
 		return name;
