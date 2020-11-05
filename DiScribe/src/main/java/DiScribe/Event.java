@@ -99,6 +99,7 @@ public class Event implements Comparable {
 	public void setdesc(String desc) {
 		if(desc.split("\\s+").length > 100) {
 			System.out.println("The desc should less than 100 words.");
+			return;
 		}
 		this.desc = desc;
 	}
