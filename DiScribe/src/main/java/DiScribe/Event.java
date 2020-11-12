@@ -200,10 +200,39 @@ public class Event implements Comparable {
 		}
 	}
 	
+	public void setann_time(int [] ann_time) {
+		if(ann_time.length > getnum_ann()) {
+			System.out.println("you only have " + getnum_ann() + " times to announce.");
+		}else {
+			Arrays.sort(ann_time);
+			this.ann_time = ann_time;
+		}
+	}
+	
+	public void setparty(ArrayList<String> party) {
+		Collections.sort(party);
+		this.party = party;
+	}
+	
+	public void addparty(String name, ArrayList<String> party) {
+		party.add(name);
+		setparty(party);
+	}
+	
+	public void removeparty(String name, ArrayList<String> party) {
+		party.remove(name);
+		setparty(party);
+	}
+	
+	
 	
 	@Override 
 	public String toString() {
-		return name;
+		return String.format(name + "  " + active + "%n" + date +" @ " + start_time + "%n"
+					+ EDT + "   " + recur + "%n" + desc + "%n--------------------------------%n"
+					+ "Number of Announcements: " + num_ann + "%n"
+					+ "Announcement #" + "%n" + "--------------------------------%n"
+					+ "Participants List: %n" + party);
 	}
 	
 	@Override
@@ -219,11 +248,34 @@ public class Event implements Comparable {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Event a = new Event("dd");
-		a.setName("sbdfdfgdfgdfgdgdfdgggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
-		System.out.println("Name: " + a.name);
-		a.setdesc("a a a a a a a a a a a a a");
-		System.out.println("desc: " + a.desc);
+		Event a = new Event("ddcc");
+		int [] ann_time = new int [] {9,10,2,3,5};
+		ArrayList<String> party = new ArrayList<String>();
+		party.add("Bob");
+		party.add("Yingbo");
+		party.add("Allen");
+		party.add("Penny");
+		a.setName("name");
+		a.setdesc("Description");
+		a.setactive(true);
+		a.setdate("2021-12-31");
+		a.setstart_time("8:30 pm");
+		a.setEDT(33);
+		a.setserver("server");
+		a.setrecur(true);
+		a.setFrequency("daily");
+		a.setmax_freq(5);
+		a.setnum_ann(5);
+		a.setann_time(ann_time);
+		if(a.getann_time()!= null) {
+			for(int i = 0; i < ann_time.length; i++) {
+				//System.out.print(a.getann_time()[i]);
+			}
+		}
+		a.setparty(party);
+		a.addparty("Mary", party);
+		a.removeparty("Mary", party);
+		System.out.println(a.toString());
 	}
 
 	
