@@ -15,6 +15,8 @@ public class Bot {
 	
 	private static EventsList events;
 	private static int numEvents = 0;
+	private static String[] cmds = {"create", "remove", "edit", "list", "display"};
+	private static String[] attr = {"name", "desc", "active", "date", "duration", "server", "channel", "recur", "frequency", "max_frequency", "number_of_announcements"};
 	
 	public static void process(String[] command, int len, MessageCreateEvent event) {
 		
@@ -24,7 +26,7 @@ public class Bot {
 		// Make sure the command has Keyword
 		if ( command[0] == null ) { return; } 
 		
-		if ( command[0].equals("create")) {
+		if ( command[0].equals(cmds[0])) {
 			if ( (command.length == 2) && events.add(new Event(command[1])) ) { // If user specifies a name
 				numEvents++;
 				event.getMessage()
@@ -45,7 +47,7 @@ public class Bot {
 			}
 		}
 		
-		if ( command[0].equals("remove")) {
+		if ( command[0].equals(cmds[1])) {
 			if ( (command.length>1) && events.remove(new Event(command[1])) ) { // Specifies event to be removed
 				event.getMessage()
 				.getChannel().block()
@@ -60,13 +62,13 @@ public class Bot {
 				}
 		}
 		
-		/*if ( command[0].equals("list")) {
+		/*if ( command[0].equals(cmds[3])) {
 			event.getMessage()
 			.getChannel().block()
 			.createMessage(events.displayList()).block();
 		}*/
 		
-		if ( command[0].equals("display")) { // Prone to Null Pointer Exceptions
+		if ( command[0].equals(cmds[4])) { // Prone to Null Pointer Exceptions
 			if ( command.length == 2) {
 				event.getMessage()
 				.getChannel().block()
@@ -82,10 +84,18 @@ public class Bot {
 			}
 		}
 		
-		if ( command[0].equals("edit")) { // To be worked on
+		if ( command[0].equals(cmds[2])) { // To be worked on
+			if ( command.length == 4 ) {
+				
+			}
+			else {
 			event.getMessage()
 			.getChannel().block()
-			.createMessage("Editing " + command[1]).block();
+			.createMessage("The edit command requires you to name the event you want to edit and the attributes as well\n\n"
+					+ "```edit [event_name] [attribute] [desired_value]```\n\n"
+					+ "Example, if I want to change the event name of BBQ to Ketchup\n"
+					+ "```edit BBQ name Ketchup```").block();
+			}
 		}
 	}
 
