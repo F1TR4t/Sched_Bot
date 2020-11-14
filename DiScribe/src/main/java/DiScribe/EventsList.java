@@ -1,11 +1,12 @@
 package DiScribe;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class EventsList {
 	
 	private ArrayList<Event> list;
-	private ArrayList<String> nameList;
+	private StringBuilder display;
 	
 	public EventsList() {
 		list = new ArrayList<Event>();
@@ -27,21 +28,40 @@ public class EventsList {
 		return true;
 	}
 	
-	public boolean remove(Event E) {
-		if(E == null) {
+	public boolean remove(String name) {
+		if(name == null) {
 			return false;
 		}
-		else if(list.contains(E) == false) {
-			return false;
-		}
-		return list.remove(E);
-	}
-	
-	public boolean contains(Event E) {
-		if(list.contains(E)) {
-			return true;
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName() == name) {
+				return list.remove(list.get(i));
+			}
 		}
 		return false;
+	}
+	
+	public boolean contains(String name) {
+		if(name == null) {
+			return false;
+		}
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName() == name) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Event get(String name) {
+		if(name == null) {
+			return null;
+		}
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName() == name) {
+				return list.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public Event get(int index) {
@@ -88,11 +108,18 @@ public class EventsList {
 	
 	public void displayList() {
 		// Temporary display method without date or status
-		
-		System.out.println(" Name                                        Date                                        Active");
-		System.out.println("------------------------------------------------------------------------------------------------");
+		int stringLen = 130;
+		display = new StringBuilder(stringLen);
+		display.append("                                                                                                                               ");
+		System.out.println(" Name                                                       Date                                                       Active ");
+		System.out.println("------------------------------------------------------------------------------------------------------------------------------");
 		for(int i = 0; i < list.size(); i++) {
-			System.out.printf("%s \n", list.get(i).toString());
+			display.insert(1, list.get(i).getName());
+			display.insert(60, list.get(i).getDate());
+			display.insert(120, list.get(i).getActive());
+			System.out.println(display);
+			display = new StringBuilder(stringLen);
+			display.append("                                                                                                                               ");
 		}
 		System.out.print("\n");
 	}
@@ -107,6 +134,22 @@ public class EventsList {
 		Event sam = new Event("sam");
 		Event jay = new Event("jay");
 		Event jen = new Event("jen");
+		bob.setDate("2000-01-01");
+		jim.setDate("2001-02-01");
+		tim.setDate("2002-03-01");
+		joe.setDate("2003-04-01");
+		sam.setDate("2004-05-01");
+		jay.setDate("2005-06-01");
+		jen.setDate("2006-07-01");
+		bob.setActive(true);
+		jim.setActive(true);
+		tim.setActive(true);
+		joe.setActive(true);
+		sam.setActive(true);
+		jay.setActive(false);
+		jen.setActive(false);
+		
+		
 		
 		// Testing regular add()
 		list.add(bob);
@@ -123,8 +166,7 @@ public class EventsList {
 		System.out.println("Testing adding at an index");
 		list.displayList();
 		
-		System.out.println(list.remove(bob));
-		System.out.println(list.remove(bob)); // Works
+		System.out.println(list.remove("bob")); // Works
 		
 		list.displayList();
 		

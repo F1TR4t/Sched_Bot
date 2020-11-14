@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Event implements Comparable {
 	
-        private String name;
+    private String name;
 	private String desc;
 	private boolean active;
 	private String date;
@@ -33,19 +33,19 @@ public class Event implements Comparable {
 		return name;
 	}
 	
-	public String getdesc() {
+	public String getDesc() {
 		return desc;
 	}
 	
-	public boolean getactive() {
+	public boolean getActive() {
 		return active;
 	}
 	
-	public String getdate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public String getstart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 	
@@ -53,15 +53,15 @@ public class Event implements Comparable {
 		return EDT;
 	}
 	
-	public String getserver() {
+	public String getServer() {
 		return server;
 	}
 	
-	public String getchannel() {
+	public String getChannel() {
 		return channel;
 	}
 	
-	public boolean getrecur() {
+	public boolean getRecur() {
 		return recur;
 	}
 	
@@ -69,19 +69,19 @@ public class Event implements Comparable {
 		return Frequency;
 	}
 	
-	public int getmax_freq() {
+	public int getMax_freq() {
 		return max_freq;
 	}
 	
-	public int getnum_ann() {
+	public int getNum_ann() {
 		return num_ann;
 	}
 	
-	public int[] getann_time() {
+	public int[] getAnn_time() {
 		return ann_time;
 	}
 	
-	public ArrayList<String> getparty(){
+	public ArrayList<String> getParty(){
 		return party;
 	}
 	
@@ -96,7 +96,7 @@ public class Event implements Comparable {
 	}
 	
 	
-	public void setdesc(String desc) {
+	public void setDesc(String desc) {
 		if(desc.split("\\s+").length > 100) {
 			System.out.println("The desc should less than 100 words.");
 			return;
@@ -105,12 +105,12 @@ public class Event implements Comparable {
 	}
 	
 	
-	public void setactive(Boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 	
 	
-	public void setdate(String date) {
+	public void setDate(String date) {
 		String regex = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher m = pattern.matcher(date);
@@ -131,7 +131,7 @@ public class Event implements Comparable {
 	}
 	
 	
-	public void setstart_time(String time) {
+	public void setStart_time(String time) {
 		this.start_time = time;
 	}
 	
@@ -146,22 +146,22 @@ public class Event implements Comparable {
 	}
 	
 	
-	public void setserver(String server) {
+	public void setServer(String server) {
 		this.server = server;
 	}
 	
-	public void setchannel(String channel) {
+	public void setChannel(String channel) {
 		this.channel = channel;
 	}
 	
 	
-	public void setrecur(Boolean recur) {
+	public void setRecur(Boolean recur) {
 		this.recur = recur;
 	}
 	
 	
 	public void setFrequency(String Frequency) {
-		if(getrecur() == false) {
+		if(getRecur() == false) {
 			System.out.println("The event will not recur.");
 		}
 		else {
@@ -176,8 +176,8 @@ public class Event implements Comparable {
 	}
 	
 	
-	public void setmax_freq(int max_freq) {
-		if(getrecur() == false) {
+	public void setMax_freq(int max_freq) {
+		if(getRecur() == false) {
 			System.out.println("The event will not recur.");
 		}
 		else {
@@ -186,12 +186,12 @@ public class Event implements Comparable {
 			}
 			else {
 				this.max_freq = max_freq;
-				this.setrecur(false);
+				this.setRecur(false);
 			}
 		}
 	}
 	
-	public void setnum_ann(int num_ann) {
+	public void setNum_ann(int num_ann) {
 		if(num_ann <= 0) {
 			System.out.println("Number of times to announce should greater than 0");
 		}
@@ -200,28 +200,28 @@ public class Event implements Comparable {
 		}
 	}
 	
-	public void setann_time(int [] ann_time) {
-		if(ann_time.length > getnum_ann()) {
-			System.out.println("you only have " + getnum_ann() + " times to announce.");
+	public void setAnn_time(int [] ann_time) {
+		if(ann_time.length > getNum_ann()) {
+			System.out.println("you only have " + getNum_ann() + " times to announce.");
 		}else {
 			Arrays.sort(ann_time);
 			this.ann_time = ann_time;
 		}
 	}
 	
-	public void setparty(ArrayList<String> party) {
+	public void setParty(ArrayList<String> party) {
 		Collections.sort(party);
 		this.party = party;
 	}
 	
-	public void addparty(String name, ArrayList<String> party) {
+	public void addParty(String name, ArrayList<String> party) {
 		party.add(name);
-		setparty(party);
+		setParty(party);
 	}
 	
-	public void removeparty(String name, ArrayList<String> party) {
+	public void removeParty(String name, ArrayList<String> party) {
 		party.remove(name);
-		setparty(party);
+		setParty(party);
 	}
 	
 	
@@ -256,25 +256,25 @@ public class Event implements Comparable {
 		party.add("Allen");
 		party.add("Penny");
 		a.setName("name");
-		a.setdesc("Description");
-		a.setactive(true);
-		a.setdate("2021-12-31");
-		a.setstart_time("8:30 pm");
+		a.setDesc("Description");
+		a.setActive(true);
+		a.setDate("2021-12-31");
+		a.setStart_time("8:30 pm");
 		a.setEDT(33);
-		a.setserver("server");
-		a.setrecur(true);
+		a.setServer("server");
+		a.setRecur(true);
 		a.setFrequency("daily");
-		a.setmax_freq(5);
-		a.setnum_ann(5);
-		a.setann_time(ann_time);
-		if(a.getann_time()!= null) {
+		a.setMax_freq(5);
+		a.setNum_ann(5);
+		a.setAnn_time(ann_time);
+		if(a.getAnn_time()!= null) {
 			for(int i = 0; i < ann_time.length; i++) {
 				//System.out.print(a.getann_time()[i]);
 			}
 		}
-		a.setparty(party);
-		a.addparty("Mary", party);
-		a.removeparty("Mary", party);
+		a.setParty(party);
+		a.addParty("Mary", party);
+		a.removeParty("Mary", party);
 		System.out.println(a.toString());
 	}
 
