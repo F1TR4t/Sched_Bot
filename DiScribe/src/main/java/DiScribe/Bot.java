@@ -6,10 +6,7 @@ import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.User;
-import discord4j.core.object.entity.channel.MessageChannel;
-import reactor.core.publisher.Mono;
 
 public class Bot {
 	
@@ -18,26 +15,22 @@ public class Bot {
 	private static String[] cmds = {"help", "create", "remove", "edit", "list", "display"};
 	private static String[] attr = {"name", "desc", "active", "date", "duration", "server", "channel"};
 	
-	private static String  help = "List of Commands include:\n-------------------------\n"
-			+ "create [Name of Event]\ndelete [Name of Event]\nedit   [Name of Event]\n"
-			+ "display [Name of Event]\nlist\n\nIf you would like to know how a command works, write the command name then \"?\" after it.";
-	
-	private static String empty = "For a list of commands, use the \"help\" command.";
-
 	public static void process(String[] cmd, int len, MessageCreateEvent event) {
 		
 		// Might not be necessary, but in case of empty Strings
 		if (len == 0) {
 			event.getMessage()
 				.getChannel().block()
-				.createMessage(empty).block();
+				.createMessage("For a list of commands, use the \"help\" command.").block();
 		} 
 		
 		// For the help command
 		if (cmd[0].toLowerCase().equals(cmds[0])) {
 			event.getMessage()
 				.getChannel().block()
-				.createMessage(help).block();
+				.createMessage("List of Commands include:\n-------------------------\n"
+						+ "create [Name of Event]\ndelete [Name of Event]\nedit   [Name of Event]\n"
+						+ "display [Name of Event]\nlist\n\nIf you would like to know how a command works, write the command name then \"?\" after it.").block();
 		}
 		
 		// for the Create Command
@@ -82,8 +75,108 @@ public class Bot {
 			}
 		}
 		
+		if (cmd[0].toLowerCase().equals(cmds[2])) {
+			
+			if ( len == 1 ) {					// If they do not provide an Event Name
+				// Display the Lists
+			}
+			
+			if ( len > 1 ) {
+				
+				if (cmd[1].equals("?")) {		// If they want to know more about remove
+					// Gives Help
+				} else {						// If they provided a name
+					String name = cmd[1];
+					for ( int i = 2; i < len; i++ ) {		
+						name += " ";
+						name += cmd[i];
+					}
+					
+					if ( events.remove(name) ) {			// Successful removal
+						
+					} else {								// Failure in removal
+						
+					}
+				}
+				
+			}
+			
+		}
 		
 		
+		if (cmd[0].toLowerCase().equals(cmds[3])) {
+			
+			if ( len == 1 ) {					// If they do not provide an Event Name
+				// Display the Lists
+			}
+			
+			if ( len > 1 ) {
+				
+				if (cmd[1].equals("?")) {		// If they want to know more about edit
+					// Gives Help
+				} else {						// If they provided a name
+					String name = cmd[1];
+					for ( int i = 2; i < len; i++ ) {		
+						name += " ";
+						name += cmd[i];
+					}
+					
+					if ( events.contains(name) ) {			// Successful finding Event to edit
+						editAttr(event, events.get(name));
+					} else {								// Failure in finding Event to edit
+						
+					}
+				}
+				
+			}
+		}
+		
+		if (cmd[0].toLowerCase().equals(cmds[4])) {
+			
+			if ( len >= 1 ) {
+				
+				if (cmd[1].equals("?")) {		// If they want to know more about list
+					// Gives Help
+				} else {						// If they provided a name
+					// List all elements
+				}
+				
+			}
+			
+		}
+		
+		if (cmd[0].toLowerCase().equals(cmds[5])) {
+			
+			if ( len == 1 ) {					// If they do not provide an Event Name
+				// Display the Lists
+			}
+			
+			if ( len > 1 ) {
+				
+				if (cmd[1].equals("?")) {		// If they want to know more about display
+					// Gives Help
+				} else {						// If they provided a name
+					String name = cmd[1];
+					for ( int i = 2; i < len; i++ ) {		
+						name += " ";
+						name += cmd[i];
+					}
+					
+					if ( events.contains(name) ) {			// Successful finding Event to display
+						
+					} else {								// Failure in finding Event to display
+						
+					}
+				}
+				
+			}
+		}
+		
+		
+	}
+	
+	// Think CS 262 where we had to loop until User was done
+	public static void editAttr(MessageCreateEvent msg, Event event) {
 		
 	}
 
@@ -104,7 +197,6 @@ public class Bot {
         .subscribe(event -> {
             final String content = event.getMessage().getContent();
             final String[] command = content.split(" ");
-            final Mono<MessageChannel> channel = event.getMessage().getChannel();
             process(command, command.length, event);
         });
         
