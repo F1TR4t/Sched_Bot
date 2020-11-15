@@ -78,13 +78,18 @@ public class Bot {
 		if (cmd[0].toLowerCase().equals(cmds[2])) {
 			
 			if ( len == 1 ) {					// If they do not provide an Event Name
-				// Display the Lists
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Please provide an event to edit. Here is a list of them.\n" + events.displayList()).block();
 			}
 			
 			if ( len > 1 ) {
 				
 				if (cmd[1].equals("?")) {		// If they want to know more about remove
-					// Gives Help
+						event.getMessage()
+						.getChannel().block()
+						.createMessage("The \"remove\" command will delete an event from the list if it exists. You must provide the name of the event you wish to remove.\n"
+								+ "```remove BBQ```\nThe command should have removed an event BBQ.").block();
 				} else {						// If they provided a name
 					String name = cmd[1];
 					for ( int i = 2; i < len; i++ ) {		
@@ -93,21 +98,27 @@ public class Bot {
 					}
 					
 					if ( events.remove(name) ) {			// Successful removal
-						
+						event.getMessage()
+						.getChannel().block()
+						.createMessage("The event \"" + name + "\" has been removed successfully.").block();
 					} else {								// Failure in removal
-						
+						event.getMessage()
+						.getChannel().block()
+						.createMessage("The event \"" + name + "\" has not been removed successfully or may have not been found. Double check to see if it exists in the list.").block();
 					}
 				}
 				
 			}
-			
+		
 		}
 		
 		
 		if (cmd[0].toLowerCase().equals(cmds[3])) {
 			
 			if ( len == 1 ) {					// If they do not provide an Event Name
-				// Display the Lists
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Please provide an event to edit. Here is a list of them.\n\n" + events.displayList()).block();
 			}
 			
 			if ( len > 1 ) {
@@ -124,7 +135,9 @@ public class Bot {
 					if ( events.contains(name) ) {			// Successful finding Event to edit
 						editAttr(event, events.get(name));
 					} else {								// Failure in finding Event to edit
-						
+						event.getMessage()
+						.getChannel().block()
+						.createMessage("The event \"" + name + "\" has not been found. Double check to see if it exists in the list.").block();
 					}
 				}
 				
@@ -133,14 +146,19 @@ public class Bot {
 		
 		if (cmd[0].toLowerCase().equals(cmds[4])) {
 			
-			if ( len >= 1 ) {
+			if ( len > 1 ) {
 				
 				if (cmd[1].equals("?")) {		// If they want to know more about list
-					// Gives Help
-				} else {						// If they provided a name
-					// List all elements
-				}
+					events.ascAlphArray(); 		// By default, Alphabetically ascending
+					event.getMessage()
+					.getChannel().block()
+					.createMessage("The \"list\" command displays all the events currently held in the Bot.").block();
+				} 
 				
+			} else {							// Else, list the events
+				event.getMessage()
+				.getChannel().block()
+				.createMessage(events.displayList()).block();
 			}
 			
 		}
@@ -148,13 +166,18 @@ public class Bot {
 		if (cmd[0].toLowerCase().equals(cmds[5])) {
 			
 			if ( len == 1 ) {					// If they do not provide an Event Name
-				// Display the Lists
+				event.getMessage()
+				.getChannel().block()
+				.createMessage("Please provide an event to edit. Here is a list of them.\n" + events.displayList()).block();
 			}
 			
 			if ( len > 1 ) {
 				
 				if (cmd[1].equals("?")) {		// If they want to know more about display
-					// Gives Help
+					event.getMessage()
+					.getChannel().block()
+					.createMessage("The \"display\" command will display the attributes of the Event provided.\n\n"
+							+ "```display BBQ```\nShould display all the attributes regarding BBQ.").block();
 				} else {						// If they provided a name
 					String name = cmd[1];
 					for ( int i = 2; i < len; i++ ) {		
@@ -163,9 +186,13 @@ public class Bot {
 					}
 					
 					if ( events.contains(name) ) {			// Successful finding Event to display
-						
+						event.getMessage()
+						.getChannel().block()
+						.createMessage(events.get(name).toString()).block();
 					} else {								// Failure in finding Event to display
-						
+						event.getMessage()
+						.getChannel().block()
+						.createMessage("The event \"" + name + "\" has not been found. Double check to see if it exists in the list.").block();
 					}
 				}
 				

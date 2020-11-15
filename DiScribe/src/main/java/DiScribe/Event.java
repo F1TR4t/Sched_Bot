@@ -229,11 +229,11 @@ public class Event{
 	
 	@Override 
 	public String toString() {
-		return String.format(name + "  " + active + "%n" + date +" @ " + start_time + "%n"
-					+ EDT + "   " + recur + "%n" + desc + "%n--------------------------------%n"
+		return String.format("```Name: " + name + "%t%tActive: " + active + "%nDate: " + date +" @ " + start_time + "%nDuration: "
+					+ EDT + "%t%tRecurring?: " + recur + "%nDescription: " + desc + "%n--------------------------------%n"
 					+ "Number of Announcements: " + num_ann + "%n"
 					+ "Announcement #" + "%n" + "--------------------------------%n"
-					+ "Participants List: %n" + party);
+					+ "Participants List: %n" + party + "```");
 	}
 	
 	// Comparator for name (ascending)
