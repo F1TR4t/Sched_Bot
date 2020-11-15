@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Comparator;
 
-public class Event implements Comparable {
+public class Event{
 	
     private String name;
 	private String desc;
@@ -235,16 +236,42 @@ public class Event implements Comparable {
 					+ "Participants List: %n" + party);
 	}
 	
-	@Override
-	public int compareTo(Object o) {
-		Event e = (Event)o;
-		
-		if ( this.name.equals(e.name) ) {
-			return 0;
-		}
-		
-		return -1;
-	}
+	// Comparator for name (ascending)
+	public static Comparator<Event> nameCompareAsc = new Comparator<Event>() {
+		public int compare(Event e1, Event e2) {
+			String eName1 = e1.getName().toUpperCase();
+			String eName2 = e2.getName().toUpperCase();
+			
+			return eName1.compareTo(eName2); 
+	}};
+	
+	// Comparator for name (descending)
+	public static Comparator<Event> nameCompareDes = new Comparator<Event>() {
+		public int compare(Event e1, Event e2) {
+			String eName1 = e1.getName().toUpperCase();
+			String eName2 = e2.getName().toUpperCase();
+			
+			return eName2.compareTo(eName1); 
+	}};
+	
+	public static Comparator<Event> dateCompareAsc = new Comparator<Event>() {
+		public int compare(Event e1, Event e2) {
+			String eDate1 = e1.getDate();
+			String eDate2 = e2.getDate();
+			
+			return eDate1.compareTo(eDate2); 
+	}};
+	
+	public static Comparator<Event> dateCompareDes = new Comparator<Event>() {
+		public int compare(Event e1, Event e2) {
+			String eDate1 = e1.getDate();
+			String eDate2 = e2.getDate();
+			
+			return eDate2.compareTo(eDate1); 
+	}};
+	
+	
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

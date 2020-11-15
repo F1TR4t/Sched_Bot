@@ -91,18 +91,30 @@ public class EventsList {
 	}
 	
 	public ArrayList<Event> ascAlphArray() {
+		
+		Collections.sort(list, Event.nameCompareAsc);
+		
 		return list;
 	}
 	
-	public ArrayList<Event> desAlphARray() {
+	public ArrayList<Event> desAlphArray() {
+		
+		Collections.sort(list, Event.nameCompareDes);
+			
 		return list;
 	}
 	
 	public ArrayList<Event> ascDateArray() {
+		
+		Collections.sort(list, Event.dateCompareAsc);
+		
 		return list;
 	}
 	
 	public ArrayList<Event> desDateArray() {
+		
+		Collections.sort(list, Event.dateCompareDes);
+		
 		return list;
 	}
 	
@@ -132,21 +144,21 @@ public class EventsList {
 		Event tim = new Event("tim");
 		Event joe = new Event("joe");
 		Event sam = new Event("sam");
-		Event jay = new Event("jay");
+		Event anne = new Event("anne");
 		Event jen = new Event("jen");
-		bob.setDate("2000-01-01");
-		jim.setDate("2001-02-01");
-		tim.setDate("2002-03-01");
-		joe.setDate("2003-04-01");
-		sam.setDate("2004-05-01");
-		jay.setDate("2005-06-01");
-		jen.setDate("2006-07-01");
+		bob.setDate("2005-01-01");
+		jim.setDate("2014-02-01");
+		tim.setDate("2003-03-01");
+		joe.setDate("2020-07-01");
+		sam.setDate("2020-01-01");
+		anne.setDate("2020-12-01");
+		jen.setDate("2020-12-15");
 		bob.setActive(true);
 		jim.setActive(true);
 		tim.setActive(true);
 		joe.setActive(true);
 		sam.setActive(true);
-		jay.setActive(false);
+		anne.setActive(false);
 		jen.setActive(false);
 		
 		
@@ -157,7 +169,7 @@ public class EventsList {
 		list.add(tim);
 		list.add(joe);
 		list.add(sam);
-		list.add(jay);
+		list.add(anne);
 		
 		// Testing displayList()
 		list.displayList(); // Works
@@ -165,6 +177,24 @@ public class EventsList {
 		list.add(3, jen);
 		System.out.println("Testing adding at an index");
 		list.displayList();
+		
+		System.out.println("Testing name sort Ascending");
+		list.ascAlphArray();
+		list.displayList();
+		
+		System.out.println("Testing name sort Descending");
+		list.desAlphArray();
+		list.displayList();
+		
+		System.out.println("Testing date sort Ascending");
+		list.ascDateArray();
+		list.displayList();
+		
+		System.out.println("Testing date sort Descending");
+		list.desDateArray();
+		list.displayList();
+		
+		
 		
 		System.out.println(list.remove("bob")); // Works
 		
