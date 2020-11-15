@@ -254,6 +254,7 @@ public class Event{
 			return eName2.compareTo(eName1); 
 	}};
 	
+	// Comparator for date (Ascending)
 	public static Comparator<Event> dateCompareAsc = new Comparator<Event>() {
 		public int compare(Event e1, Event e2) {
 			String eDate1 = e1.getDate();
@@ -262,6 +263,7 @@ public class Event{
 			return eDate1.compareTo(eDate2); 
 	}};
 	
+	// Comparator for date (Descending)
 	public static Comparator<Event> dateCompareDes = new Comparator<Event>() {
 		public int compare(Event e1, Event e2) {
 			String eDate1 = e1.getDate();

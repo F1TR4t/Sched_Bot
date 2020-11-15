@@ -152,7 +152,7 @@ public class EventsList {
 		joe.setDate("2020-07-01");
 		sam.setDate("2020-01-01");
 		anne.setDate("2020-12-01");
-		jen.setDate("2020-12-15");
+		jen.setDate("2020-12-14");
 		bob.setActive(true);
 		jim.setActive(true);
 		tim.setActive(true);
