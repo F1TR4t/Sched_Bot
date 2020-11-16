@@ -89,19 +89,19 @@ public class Event{
 	
 	//Setter
 	public void setName(String name) {
-		if(name.length() > 50) {
+		/*if(name.length() > 50) {
 			System.out.println("The name of event you set should less than 50 characters.");
 			return;
-		}
+		}*/
 		this.name = name;
 	}
 	
 	
 	public void setDesc(String desc) {
-		if(desc.split("\\s+").length > 100) {
+		/*if(desc.split("\\s+").length > 100) {
 			System.out.println("The desc should less than 100 words.");
 			return;
-		}
+		}*/
 		this.desc = desc;
 	}
 	
@@ -229,11 +229,12 @@ public class Event{
 	
 	@Override 
 	public String toString() {
-		return String.format("```Name: " + name + "%t%tActive: " + active + "%nDate: " + date +" @ " + start_time + "%nDuration: "
-					+ EDT + "%t%tRecurring?: " + recur + "%nDescription: " + desc + "%n--------------------------------%n"
+		return String.format("```Name: " + name + "\t\tActive: " + active + "\nDate: " + date /*+" @ " + start_time*/ + "\nDuration: "
+					+ EDT + " mins" /*+ %t%tRecurring?: " + recur*/ + "\nDescription: " + desc /*+ "\n--------------------------------\n"
 					+ "Number of Announcements: " + num_ann + "%n"
 					+ "Announcement #" + "%n" + "--------------------------------%n"
-					+ "Participants List: %n" + party + "```");
+					+ "Participants List: %n" + party */
+					+ "```");
 	}
 	
 	// Comparator for name (ascending)

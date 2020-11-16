@@ -123,18 +123,19 @@ public class EventsList {
 		int stringLen = 130;
 		String msg = "";
 		display = new StringBuilder(stringLen);
-		display.append("                                                                                                                               ");
-		msg += (" Name                                                       Date                                                       Active \n");
-		msg += ("------------------------------------------------------------------------------------------------------------------------------\n");
+		display.append("                                                                                                                    ");
+		msg += ("```Name                                                       Date                                             Active \n");
+		msg += ("----------------------------------------------------------------------------------------------------------------------\n");
 		for(int i = 0; i < list.size(); i++) {
 			display.insert(1, list.get(i).getName());
 			display.insert(60, list.get(i).getDate());
-			display.insert(120, list.get(i).getActive());
+			display.insert(110, list.get(i).getActive());
 			msg += display.toString();
 			msg += "\n";
 			display = new StringBuilder(stringLen);
-			display.append("                                                                                                                               ");
+			display.append("                                                                                                                    ");
 		}
+		msg += "```";
 		return msg;
 	}
 	
