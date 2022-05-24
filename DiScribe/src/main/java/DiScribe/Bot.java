@@ -247,7 +247,7 @@ public class Bot {
 	
 
     public static void main(String[] args) {
-        client = DiscordClientBuilder.create("NzYzMTA4MzI0MjU3NjkzNzA2.X3y6Ag.Ea26RdHEbuLMWpMWC3cvOB8pY3I").build().login().block();
+        client = DiscordClientBuilder.create("[INSERT YOUR DISCORD BOT TOKEN]").build().login().block();
         
         client.getEventDispatcher().on(ReadyEvent.class).subscribe(event -> {
           User self = event.getSelf();
